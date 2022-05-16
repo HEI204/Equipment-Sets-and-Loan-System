@@ -1,0 +1,53 @@
+Please input the file pathname: 3a3.txt
+
+> startNewDay 03-Jan-2022
+
+> register 001 helena
+Done.
+
+> register 002 jason
+Done.
+
+> create E1 3D_Scanner
+Done.
+
+> arrive E1
+Done.
+
+> request 002 E1 29-Oct-2022 4
+002 jason requests E1_1 (3D_Scanner) for 29-Oct-2022 to 2-Nov-2022
+Done.
+
+> request 002 E1 27-Oct-2022 10
+The period overlaps with a current period that the member borrows / requests the equipment.
+
+> request 002 E1 29-Dec-2022 4
+002 jason requests E1_1 (3D_Scanner) for 29-Dec-2022 to 2-Jan-2023
+Done.
+
+> request 002 E1 27-Dec-2022 10
+The period overlaps with a current period that the member borrows / requests the equipment.
+
+> listEquipment
+Code Name              #sets
+E1   3D_Scanner          1
+
+> listMembers
+ID   Name      Join Date   #Borrowed   #Requested
+001  helena    3-Jan-2022      0            0
+002  jason     3-Jan-2022      0            2
+
+> listEquipmentStatus
+[E1 3D_Scanner]
+  E1_1
+    Current status: Available
+    Requested period(s): 29-Oct-2022 to 2-Nov-2022, 29-Dec-2022 to 2-Jan-2023
+
+
+> listMemberStatus
+[001 helena]
+No record.
+
+[002 jason]
+- requests E1_1 (3D_Scanner) for 29-Oct-2022 to 2-Nov-2022
+- requests E1_1 (3D_Scanner) for 29-Dec-2022 to 2-Jan-2023

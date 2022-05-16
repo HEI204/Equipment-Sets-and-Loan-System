@@ -1,0 +1,50 @@
+Please input the file pathname: 3a1.txt
+
+> startNewDay 03-Jan-2022
+
+> register 001 helena 
+Done.
+
+> register 002 jason  
+Done.
+
+> create E1 3D_Scanner
+Done.
+
+> arrive E1    
+Done.
+
+> borrow 001 E1
+001 helena borrows E1_1 (3D_Scanner) for 3-Jan-2022 to 10-Jan-2022
+Done.
+
+> startNewDay 06-Jan-2022
+Done.
+
+> request 002 E1 07-Jan-2022 2
+There is no available set of this equipment for the command.
+
+> request 002 E1 07-Jan-2022 12
+There is no available set of this equipment for the command.
+
+> listEquipment
+Code Name              #sets
+E1   3D_Scanner          1  (Borrowed set(s): E1_1(001))    
+
+> listMembers
+ID   Name      Join Date   #Borrowed   #Requested
+001  helena    3-Jan-2022      1            0
+002  jason     3-Jan-2022      0            0
+
+> listEquipmentStatus
+[E1 3D_Scanner]
+  E1_1
+    Current status: 001 helena borrows for 3-Jan-2022 to 10-Jan-2022
+
+
+> listMemberStatus
+[001 helena]
+- borrows E1_1 (3D_Scanner) for 3-Jan-2022 to 10-Jan-2022
+
+[002 jason]
+No record.
