@@ -34,9 +34,7 @@ public class BorrowRecord implements Comparable<BorrowRecord> {
     public boolean checkSameSetOfEquipmentSet(EquipmentSet es) {
         return equipSet.checkSameSetOfEquipment(es);
     }
-
     
-
     public boolean checkOverlapPeriodsWithBorrow(Day startDay, Day endDay) {
         // No overlapping if (new request end day is earlier than existing borrow start day) or (new request start day is later than existing borrow end day)
         if (this.borrowEndDay.compareTo(startDay) == -1 || this.borrowStartDay.compareTo(endDay) == 1)

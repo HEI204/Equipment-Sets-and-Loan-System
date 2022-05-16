@@ -32,7 +32,7 @@ public class CmdRequestEquipment extends RecordedCommand {
             if (numberOfDays < 1)
                 throw new ExInvalidNumberOfDays();
             // Create the end day object if able to get the number of day
-            Day endDay = startDay.advanaceDay(Integer.parseInt(cmdParts[4]));
+            Day endDay = startDay.advanaceDay(numberOfDays);
 
             equipSet = e.getCanRequestEquipmentSet(m, startDay, endDay);
             if (equipSet == null)

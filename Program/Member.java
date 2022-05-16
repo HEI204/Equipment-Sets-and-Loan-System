@@ -37,13 +37,12 @@ public class Member implements Comparable<Member> {
 
     // When a member borrow an equipment, check and make sure he/she has not borrowed the same equipment before
     // and also the borrow period is not overlap with previous requested record
-    public void borrowEquipment(EquipmentSet eSetToBeBorrow, BorrowRecord equipmentBorrowRecord)
-            throws ExAlreadyBorrowSameEquipment, ExOverlapPeriods {
-        if (requestedRecords.size() > 0) {
-            // Avoid borrow two or more sets of the same equipment
-            if (checkBorrowAlready(eSetToBeBorrow))
-                throw new ExAlreadyBorrowSameEquipment();
+    public void borrowEquipment(EquipmentSet eSetToBeBorrow, BorrowRecord equipmentBorrowRecord) throws ExAlreadyBorrowSameEquipment, ExOverlapPeriods {
+        // Avoid borrow two or more sets of the same equipment
+        if (checkBorrowAlready(eSetToBeBorrow))
+            throw new ExAlreadyBorrowSameEquipment();
 
+        if (requestedRecords.size() > 0) {
             Day borrowStartDay = equipmentBorrowRecord.getBorrowStartDay();
             Day borrowEndDay = equipmentBorrowRecord.getBorrowEndDay();
             for (RequestRecord r : requestedRecords) {
@@ -56,10 +55,6 @@ public class Member implements Comparable<Member> {
         }
 
         else {
-            // Avoid borrow two or more sets of the same equipment
-            if (checkBorrowAlready(eSetToBeBorrow))
-                throw new ExAlreadyBorrowSameEquipment();
-
             eSetToBeBorrow.borrowBy(equipmentBorrowRecord);
             this.borrowedRecords.add(equipmentBorrowRecord);
         }
@@ -81,19 +76,16 @@ public class Member implements Comparable<Member> {
     // When a member try to request an equipment, check and make sure the request is not overlap with
     // he/she previous request/borrow record
     public void requestEquipment(EquipmentSet equipSet, RequestRecord equipRequest) throws ExOverlapPeriods {
-        if (borrowedRecords.size() > 0 || requestedRecords.size() > 0) {
-            for (BorrowRecord b : borrowedRecords) {
-                if (b.checkSameSetOfEquipmentSet(equipSet))
-                    if (equipRequest.checkOverlapPeriods(b.getBorrowStartDay(), b.getBorrowEndDay()))
-                        throw new ExOverlapPeriods("The period overlaps with a current period that the member borrows / requests the equipment.");
-            }
+        for (BorrowRecord b : borrowedRecords) {
+            if (b.checkSameSetOfEquipmentSet(equipSet))
+                if (equipRequest.checkOverlapPeriods(b.getBorrowStartDay(), b.getBorrowEndDay()))
+                    throw new ExOverlapPeriods("The period overlaps with a current period that the member borrows / requests the equipment.");
+        }
 
-            for (RequestRecord r : requestedRecords) {
-                if (r.findRequestedEquipSet(equipSet))
-                    if (r.checkOverlapPeriods(equipRequest.getRequestStartDay(),
-                            equipRequest.getRequestEndDay()))
-                        throw new ExOverlapPeriods("The period overlaps with a current period that the member borrows / requests the equipment.");
-            }
+        for (RequestRecord r : requestedRecords) {
+            if (r.findRequestedEquipSet(equipSet))
+                if (r.checkOverlapPeriods(equipRequest.getRequestStartDay(), equipRequest.getRequestEndDay()))
+                    throw new ExOverlapPeriods("The period overlaps with a current period that the member borrows / requests the equipment.");
         }
 
         equipSet.addRequest(equipRequest);

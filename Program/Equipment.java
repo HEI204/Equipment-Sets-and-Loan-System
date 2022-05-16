@@ -21,13 +21,13 @@ public class Equipment implements Comparable<Equipment> {
     // If no loan record return empty string
     public String loanDetails() {
         String info = "";
-        boolean first_output = true;
+        boolean firstOutput = true;
         for (EquipmentSet eSet : sets) {
             if (!eSet.checkAvailable()) {
-                if (!first_output)
+                if (!firstOutput)
                     info += ", ";
                 info += eSet.memberInfoForBorrow(); // e.g: E1_1(001)
-                first_output = false;
+                firstOutput = false;
             }
         }
 
@@ -62,7 +62,7 @@ public class Equipment implements Comparable<Equipment> {
     }
 
     // Find an equipment set which is avilable status
-    public EquipmentSet getCanBorrowEquipmentSet(Member m, Day borrowStartDay, Day borrowEndDay) throws ExOverlapPeriods {
+    public EquipmentSet getCanBorrowEquipmentSet(Member m) throws ExOverlapPeriods {
         for (EquipmentSet eSet : sets)
             if (eSet.checkAvailable())
                 return eSet;

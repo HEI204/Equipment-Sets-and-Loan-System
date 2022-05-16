@@ -41,7 +41,7 @@ public class CmdBorrowEquipment extends RecordedCommand {
 
             // Return the EquipmentSet from the Equipment which is allow member to borrow
             // If there is overlap periods then throw exception
-            equipSet = e.getCanBorrowEquipmentSet(m, startDay, endDay);
+            equipSet = e.getCanBorrowEquipmentSet(m);
 
             // If it is null means there is no available equipment set then throw exception
             if (equipSet == null)
